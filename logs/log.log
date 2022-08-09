@@ -1,3 +1,66 @@
 info: Connected to MongoDB
 info: Listening to port 80
 warn: Unable to connect to email server. Make sure you have configured the SMTP options in .env
+[32minfo[39m: Connected to MongoDB
+[32minfo[39m: Listening to port 80
+[33mwarn[39m: Unable to connect to email server. Make sure you have configured the SMTP options in .env
+[31merror[39m: Error: Not found
+    at D:\Web\rode-battle-be\src\app.js:58:10
+    at Layer.handle [as handle_request] (D:\Web\rode-battle-be\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:317:13)
+    at D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:275:10)
+    at initialize (D:\Web\rode-battle-be\node_modules\passport\lib\middleware\initialize.js:53:5)
+    at Layer.handle [as handle_request] (D:\Web\rode-battle-be\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:317:13)
+    at D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\Web\rode-battle-be\node_modules\cors\lib\index.js:188:7)
+    at D:\Web\rode-battle-be\node_modules\cors\lib\index.js:224:17
+    at originCallback (D:\Web\rode-battle-be\node_modules\cors\lib\index.js:214:15)
+    at D:\Web\rode-battle-be\node_modules\cors\lib\index.js:219:13
+[31merror[39m: GET / 404 - 31.872 ms - message: Not found
+[31merror[39m: Error: Not found
+    at D:\Web\rode-battle-be\src\app.js:58:10
+    at Layer.handle [as handle_request] (D:\Web\rode-battle-be\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:317:13)
+    at D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:275:10)
+    at initialize (D:\Web\rode-battle-be\node_modules\passport\lib\middleware\initialize.js:53:5)
+    at Layer.handle [as handle_request] (D:\Web\rode-battle-be\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:317:13)
+    at D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\Web\rode-battle-be\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\Web\rode-battle-be\node_modules\cors\lib\index.js:188:7)
+    at D:\Web\rode-battle-be\node_modules\cors\lib\index.js:224:17
+    at originCallback (D:\Web\rode-battle-be\node_modules\cors\lib\index.js:214:15)
+    at D:\Web\rode-battle-be\node_modules\cors\lib\index.js:219:13
+[31merror[39m: GET /favicon.ico 404 - 15.403 ms - message: Not found
+[32minfo[39m: GET /v1/docs 301 - 7.016 ms
+[32minfo[39m: GET /v1/docs/ 304 - 6.234 ms
+[32minfo[39m: GET /v1/docs/swagger-ui.css 304 - 6.075 ms
+[32minfo[39m: GET /v1/docs/swagger-ui-bundle.js 304 - 2.953 ms
+[32minfo[39m: GET /v1/docs/swagger-ui-init.js 304 - 2.176 ms
+[32minfo[39m: GET /v1/docs/swagger-ui-standalone-preset.js 304 - 3.209 ms
+[34mdebug[39m: development
+[32minfo[39m: Connected to MongoDB
+[32minfo[39m: Listening to port 80
+info: Connected to MongoDB
+error: Error: bind EADDRINUSE null:80
+    at listenOnPrimaryHandle (node:net:1397:18)
+    at shared (node:internal/cluster/child:149:3)
+    at Worker.<anonymous> (node:internal/cluster/child:106:7)
+    at process.onInternalMessage (node:internal/cluster/utils:49:5)
+    at process.emit (node:events:532:35)
+    at emit (node:internal/child_process:936:14)
+    at processTicksAndRejections (node:internal/process/task_queues:84:21)
+[33mwarn[39m: Unable to connect to email server. Make sure you have configured the SMTP options in .env
+[34mdebug[39m: development
+[32minfo[39m: Connected to MongoDB
+[32minfo[39m: Listening to port 5000
+[32minfo[39m: Connected to MongoDB
+[32minfo[39m: Listening to port 5000
