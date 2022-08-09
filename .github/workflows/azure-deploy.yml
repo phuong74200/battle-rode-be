@@ -11,15 +11,21 @@ jobs:
         node-version: [14.x]
 
     steps:
+      - name: Build Number Generator
+        uses: einaregilsson/build-number@v3
+        with:
+          token: ${{secrets.github_token}}   
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: pwd
-      - run: yarn install
-      - run: cp ~/battle-rode-be/.env ./.env
-      - run: pm2 start ecosystem.dev.config.json
-      - run: pm2 start app
-      - run: pm2 save
-      - run: echo GIT_VERSION=$BATTLE_RODE_VERSION>>./.env
+      - run: echo "Build number is $BUILD_NUMBER"
+      - name: Setup up dependencies
+        run: yarn install
+      - name: Setup environment
+        run: cp ~/battle-rode-be/.env ./.env
+      - name: Setup cluster (pm2) background process
+        run: pm2 start ecosystem.dev.config.json
+        run: pm2 start app
+        run: pm2 save
