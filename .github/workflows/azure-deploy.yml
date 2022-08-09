@@ -21,3 +21,4 @@ jobs:
       - run: cp ~/battle-rode-be/.env ./.env
       - run: npx kill-port 3000
       - run: yarn start:background
+      - run: npx pm2 start app
