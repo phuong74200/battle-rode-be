@@ -28,3 +28,7 @@ jobs:
                   PORT: ${{ secrets.PORT }}
                   KEY: ${{ secrets.SSH_KEY }}
                   script: ls
+                      kill -9 `lsof -i:3000 -t`
+                      cd ~/battle-rode-be-prod
+                      yarn install
+                      yarn start
