@@ -11,8 +11,17 @@ const register = catchAsync(async (req, res) => {
 const login = catchAsync(async (req, res) => {
     const { idToken } = req.body;
     const user = await authService.loginWithGoogle(idToken);
-    // const tokens = await tokenService.generateAuthTokens(user);
-    res.json({ user });
+    const tokens = await tokenService.generateAuthTokens(user);
+    res.json({
+        tokens,
+        g_user: {
+            email: user.email,
+            name: user.name,
+            picture: user.picture,
+            given_name: user.given_name,
+            family_name: user.family_name,
+        },
+    });
 });
 
 const logout = catchAsync(async (req, res) => {

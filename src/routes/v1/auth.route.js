@@ -52,10 +52,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 user:
- *                   $ref: '#/components/schemas/GoogleUser'
+ *               $ref: '#/components/schemas/GoogleUser'
  *       "401":
  *         description: Invalid user's token ID
  *         content:
