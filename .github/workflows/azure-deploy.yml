@@ -21,6 +21,6 @@ jobs:
       - run: cp ~/battle-rode-be/.env ./.env
       - run: npx kill-port 3000
       - run: yarn start:background
-      - run: npx pm2 start app
-      - run: npx pm2 save
-      - run: npx pm2 startup systemd
+      - run: pm2 start app
+      - run: pm2 save
+      - run: pm2 startup systemd
