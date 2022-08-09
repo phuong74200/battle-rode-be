@@ -19,7 +19,6 @@ jobs:
       - run: pwd
       - run: yarn install
       - run: cp ~/battle-rode-be/.env ./.env
-      - run: npx kill-port 3000
       - run: pm2 start ecosystem.dev.config.json
       - run: pm2 start app
       - run: pm2 save
