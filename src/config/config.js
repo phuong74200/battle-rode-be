@@ -25,6 +25,7 @@ const envVarsSchema = Joi.object()
         EMAIL_FROM: Joi.string().description('the from field in the emails sent by the app'),
         GOOGLE_CLIENT_ID: Joi.string().description('Google OAuth Client ID free to share'),
         GOOGLE_CLIENT_SECRET: Joi.string().description("Google OAuth Client Secret. Don't share it with anyone"),
+        GIT_ACTION_VERSION: Joi.string().description('Git Action Build Number'),
     })
     .unknown();
 
@@ -37,6 +38,7 @@ if (error) {
 module.exports = {
     env: envVars.NODE_ENV,
     port: envVars.PORT,
+    gitActionVersion: envVars.GIT_ACTION_VERSION,
     mongoose: {
         url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
         options: {
