@@ -23,4 +23,4 @@ jobs:
       - run: yarn start:background
       - run: npx pm2 start app
       - run: npx pm2 save
-      - run: npx pm2 startup upstart
+      - run: npx pm2 startup
