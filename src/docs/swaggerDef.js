@@ -8,7 +8,7 @@ const swaggerDef = {
         version,
         license: {
             name: 'MIT',
-            url: 'https://github.com/hagopj13/node-express-boilerplate/blob/master/LICENSE',
+            url: 'https://github.com/phuong74200/battle-rode-be',
         },
     },
     servers: [
