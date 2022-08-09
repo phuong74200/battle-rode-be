@@ -17,4 +17,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install
+      - run: cp ~/battle-rode-be/.env ./.env
+      - run: npx kill-port 3000
       - run: yarn start
