@@ -23,4 +23,3 @@ jobs:
       - run: pm2 start ecosystem.config.json
       - run: pm2 start app
       - run: pm2 save
-      - run: pm2 startup
