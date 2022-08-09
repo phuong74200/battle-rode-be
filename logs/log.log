@@ -64,3 +64,6 @@ error: Error: bind EADDRINUSE null:80
 [32minfo[39m: Listening to port 5000
 [32minfo[39m: Connected to MongoDB
 [32minfo[39m: Listening to port 5000
+[32minfo[39m: Connected to MongoDB
+[32minfo[39m: Listening to port 5000
+[33mwarn[39m: Unable to connect to email server. Make sure you have configured the SMTP options in .env
