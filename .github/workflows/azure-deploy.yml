@@ -18,7 +18,7 @@ jobs:
                   KEY: ${{ secrets.SSH_KEY }}
               with:
                   source: '.'
-                  target: '/battle-rode-be'
+                  target: '/battle-rode-be-prod'
 
             - name: Executing remote command
               uses: appleboy/ssh-action@master
