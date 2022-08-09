@@ -20,12 +20,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        run: echo "Build number is $BUILD_NUMBER"
-      - name: Setup up dependencies
-        run: yarn install
-      - name: Setup environment
-        run: cp ~/battle-rode-be/.env ./.env
-      - name: Setup cluster (pm2) background process
-        run: pm2 start ecosystem.dev.config.json
-        run: pm2 start app
-        run: pm2 save
+      - run: echo "Build number is $BUILD_NUMBER"
+      - run: yarn install
+      - run: cp ~/battle-rode-be/.env ./.env
+      - run: pm2 start ecosystem.dev.config.json
+      - run: pm2 start app
+      - run: pm2 save
+      - run: echo GIT_VERSION=$BATTLE_RODE_VERSION>>./.env
+      - run: export BATTLE_RODE_VERSION=$(($BATTLE_RODE_VERSION+1))
