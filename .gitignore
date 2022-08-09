@@ -13,6 +13,3 @@ coverage
 
 # logs file
 logs
-/logs
-logs/*
-*.log
