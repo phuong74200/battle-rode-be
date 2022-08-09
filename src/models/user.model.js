@@ -32,6 +32,17 @@ const userSchema = mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        picture: {
+            type: String,
+        },
+        organization: {
+            type: String,
+            validate(value) {
+                if (value !== '@fpt.edu.vn') {
+                    throw new Error('Invalid organization');
+                }
+            },
+        },
     },
     {
         timestamps: true,

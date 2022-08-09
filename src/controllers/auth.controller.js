@@ -2,6 +2,8 @@ const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { authService, userService, tokenService, emailService } = require('../services');
 
+const logger = require('../config/logger');
+
 const register = catchAsync(async (req, res) => {
     const user = await userService.createUser(req.body);
     const tokens = await tokenService.generateAuthTokens(user);
@@ -10,18 +12,30 @@ const register = catchAsync(async (req, res) => {
 
 const login = catchAsync(async (req, res) => {
     const { idToken } = req.body;
-    const user = await authService.loginWithGoogle(idToken);
-    const tokens = await tokenService.generateAuthTokens(user);
-    res.json({
-        tokens,
-        g_user: {
-            email: user.email,
-            name: user.name,
-            picture: user.picture,
-            given_name: user.given_name,
-            family_name: user.family_name,
-        },
-    });
+    const gUser = await authService.loginWithGoogle(idToken);
+    const tokens = await tokenService.generateAuthTokens(gUser);
+
+    const user = await userService.getUserByEmail(gUser.email);
+
+    if (user) {
+        res.json({
+            tokens,
+            userData: user,
+        });
+    } else {
+        const newUser = {
+            email: gUser.email,
+            name: gUser.name,
+            picture: gUser.picture,
+            organization: gUser.hat,
+            isEmailVerified: gUser.email_verified,
+        };
+        const createdUser = await userService.createUser(newUser);
+        res.json({
+            tokens,
+            userData: createdUser,
+        });
+    }
 });
 
 const logout = catchAsync(async (req, res) => {
