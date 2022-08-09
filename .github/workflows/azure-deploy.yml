@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: echo "Build number is $BUILD_NUMBER"
+      - run: echo "Build number is $(($BUILD_NUMBER+40))"
       - run: yarn install
       - run: cp ~/battle-rode-be/.env ./.env
       - run: pm2 start ecosystem.dev.config.json
