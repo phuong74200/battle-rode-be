@@ -25,4 +25,4 @@ jobs:
       - run: pm2 start ecosystem.dev.config.json
       - run: pm2 start app
       - run: pm2 save
-      - run: echo $(($BUILD_NUMBER+40+100)) | fold -w1 | paste -sd.>>./.env
+      - run: echo VER=`echo $(($BUILD_NUMBER+40+100)) | fold -w1 | paste -sd.>>./.env`
