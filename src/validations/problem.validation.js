@@ -3,7 +3,7 @@ const Joi = require('joi');
 const createProblem = {
     body: Joi.object().keys({
         name: Joi.string().required(),
-        imageURL: Joi.string().required(),
+        image: Joi.string().required(),
     }),
 };
 

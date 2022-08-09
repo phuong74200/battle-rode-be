@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const catchAsync = require('../utils/catchAsync');
+const ApiError = require('../utils/ApiError');
 const { problemService } = require('../services');
 
 const createProblem = catchAsync(async (req, res) => {
@@ -18,7 +19,10 @@ const getProblem = catchAsync(async (req, res) => {
 const getProblemById = catchAsync(async (req, res) => {
     const { problemId } = pick(req.params, ['problemId']);
     const result = await problemService.getProblemById(problemId);
-    res.json({ problem: result, problemId });
+    if (!result) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Problem not found');
+    }
+    res.json({ problem: result });
 });
 
 module.exports = {
