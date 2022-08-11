@@ -15,4 +15,4 @@ coverage
 logs
 
 # files
-upload
+upload/images/*
