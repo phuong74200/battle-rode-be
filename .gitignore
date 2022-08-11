@@ -16,3 +16,6 @@ logs
 
 # files
 upload/images/*
+
+# keep empty folder by this file
+!.empty
