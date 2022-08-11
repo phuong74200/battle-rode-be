@@ -3,8 +3,8 @@ const Joi = require('joi');
 const createProblem = {
     body: Joi.object().keys({
         name: Joi.string().required(),
-        image: Joi.string().required(),
     }),
+    file: Joi.object().required().label('image is required'),
 };
 
 const getProblemById = {

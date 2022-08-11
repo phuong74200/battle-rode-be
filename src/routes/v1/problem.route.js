@@ -1,12 +1,20 @@
 const express = require('express');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
+const multer = require('../../middlewares/multer');
 const problemValidation = require('../../validations/problem.validation');
 const problemController = require('../../controllers/problem.controller');
+const imageSizeLimit = require('../../middlewares/imageSizeLimit');
 
 const router = express.Router();
 
-router.route('/').post(auth('createProblem'), validate(problemValidation.createProblem), problemController.createProblem);
+router
+    .route('/')
+    .post(
+        auth('createProblem'),
+        [multer.image.single('image'), imageSizeLimit(400, 300), validate(problemValidation.createProblem)],
+        problemController.createProblem
+    );
 
 router.route('/:problemId').get(auth(), validate(problemValidation.getProblemById), problemController.getProblemById);
 

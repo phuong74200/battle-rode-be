@@ -5,15 +5,18 @@ const ApiError = require('../utils/ApiError');
 const { problemService } = require('../services');
 
 const createProblem = catchAsync(async (req, res) => {
-    const problemBody = pick(req.body, ['name', 'imageURL']);
-    const result = await problemService.createProblem(problemBody);
-    res.status(httpStatus.CREATED).send(result);
-});
+    const problemBody = pick(req.body, ['name']);
+    const problemFile = pick(req.file, ['filename']);
 
-const getProblem = catchAsync(async (req, res) => {
-    const { id } = pick(req.query, ['problemId']);
-    const result = await problemService.getProblemById(id);
-    res.send(result);
+    const result = await problemService.createProblem({
+        ...problemBody,
+        ...problemFile,
+    });
+    res.status(httpStatus.CREATED).json({
+        name: result.name,
+        problemId: result.problemId,
+        image: `${req.protocol}://${req.headers.host}/v1/image/${result.image}`,
+    });
 });
 
 const getProblemById = catchAsync(async (req, res) => {
@@ -22,11 +25,14 @@ const getProblemById = catchAsync(async (req, res) => {
     if (!result) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Problem not found');
     }
-    res.json({ problem: result });
+    res.json({
+        name: result.name,
+        problemId: result.problemId,
+        image: `${req.protocol}://${req.headers.host}/v1/image/${result.image}`,
+    });
 });
 
 module.exports = {
     getProblemById,
     createProblem,
-    getProblem,
 };

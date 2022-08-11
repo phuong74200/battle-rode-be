@@ -26,6 +26,8 @@ const envVarsSchema = Joi.object()
         GOOGLE_CLIENT_ID: Joi.string().description('Google OAuth Client ID free to share'),
         GOOGLE_CLIENT_SECRET: Joi.string().description("Google OAuth Client Secret. Don't share it with anyone"),
         GIT_ACTION_VERSION: Joi.string().description('Git Action Build Number'),
+        PROBLEM_IMAGE_SIZE_W: Joi.number().description('Problem Image Width'),
+        PROBLEM_IMAGE_SIZE_H: Joi.number().description('Problem Image Height'),
     })
     .unknown();
 
@@ -68,5 +70,11 @@ module.exports = {
     google: {
         clientID: envVars.GOOGLE_CLIENT_ID,
         clientSecret: envVars.GOOGLE_CLIENT_SECRET,
+    },
+    problem: {
+        image: {
+            w: envVars.PROBLEM_IMAGE_SIZE_W,
+            h: envVars.PROBLEM_IMAGE_SIZE_H,
+        },
     },
 };

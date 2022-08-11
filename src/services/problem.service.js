@@ -1,12 +1,17 @@
 const { Problem } = require('../models');
+const logger = require('../config/logger');
 
 /**
  * Create a user
  * @param {Object} userBody
  * @returns {Promise<User>}
  */
-const createProblem = async (problemBody) => {
-    return Problem.create(problemBody);
+const createProblem = async (problem) => {
+    logger.debug(JSON.stringify(problem));
+    return Problem.create({
+        name: problem.name,
+        image: problem.filename,
+    });
 };
 
 /**

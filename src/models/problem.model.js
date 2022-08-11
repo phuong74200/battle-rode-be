@@ -11,8 +11,9 @@ const problemSchema = mongoose.Schema(
         },
         image: {
             type: String,
+            required: true,
         },
-        id: {
+        problemId: {
             type: Number,
         },
     },
@@ -23,7 +24,7 @@ const problemSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 problemSchema.plugin(toJSON);
-problemSchema.plugin(AutoIncrement, { inc_field: 'id' });
+problemSchema.plugin(AutoIncrement, { inc_field: 'problemId' });
 
 /**
  * @typedef Problem
