@@ -16,6 +16,18 @@ const problemSchema = mongoose.Schema(
         problemId: {
             type: Number,
         },
+        openTime: {
+            type: Date,
+            required: true,
+        },
+        closeTime: {
+            type: Date,
+            required: true,
+        },
+        battleTime: {
+            type: Number,
+            default: 30 * 60, // exam time is in seconds
+        },
     },
     {
         timestamps: true,

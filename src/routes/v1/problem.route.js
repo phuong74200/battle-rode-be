@@ -16,7 +16,9 @@ router
         problemController.createProblem
     );
 
-router.route('/:problemId').get(auth(), validate(problemValidation.getProblemById), problemController.getProblemById);
+router
+    .route('/:problemId')
+    .get(auth('getProblem'), validate(problemValidation.getProblemById), problemController.getProblemById);
 
 module.exports = router;
 

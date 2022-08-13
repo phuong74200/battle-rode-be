@@ -4,6 +4,7 @@ const userRoute = require('./user.route');
 const docsRoute = require('./docs.route');
 const problemRoute = require('./problem.route');
 const imageRoute = require('./image.route');
+const battleRoute = require('./battle.route');
 const config = require('../../config/config');
 
 const router = express.Router();
@@ -24,6 +25,10 @@ const defaultRoutes = [
     {
         path: '/image',
         route: imageRoute,
+    },
+    {
+        path: '/battle',
+        route: battleRoute,
     },
 ];
 
