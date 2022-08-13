@@ -43,21 +43,4 @@ module.exports = router;
  *             properties:
  *               idToken:
  *                 type: string
- *                 format: jwt
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/GoogleUser'
- *       "401":
- *         description: Invalid user's token ID
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
- *             example:
- *               code: 401
- *               message: Invalid user
  */

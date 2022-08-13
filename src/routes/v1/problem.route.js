@@ -36,35 +36,25 @@ module.exports = router;
  *     summary: Create a new problem
  *     tags: [Problem]
  *     requestBody:
- *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
- *             required:
- *               - name
- *               - image
  *             properties:
- *               name:
- *                 type: string
  *               image:
  *                 type: string
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/GoogleUser'
- *       "401":
- *         description: Invalid user's token ID
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
- *             example:
- *               code: 401
- *               message: Invalid user
+ *                 format: binary
+ *               name:
+ *                 type: string
+ *               openTime:
+ *                 type: string
+ *                 format: YYYY-MM-DDTHH:mm:ss.SSSZ
+ *               closeTime:
+ *                 type: string
+ *                 format: YYYY-MM-DDTHH:mm:ss.SSSZ
+ *               battleTime:
+ *                 description: Limit time of the round in seconds
+ *                 type: integer
  */
 
 /**
