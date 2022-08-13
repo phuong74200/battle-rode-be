@@ -42,6 +42,7 @@ module.exports = router;
  *             type: object
  *             properties:
  *               image:
+ *                 description: Size of the image must be 400x300
  *                 type: string
  *                 format: binary
  *               name:
@@ -55,6 +56,7 @@ module.exports = router;
  *               battleTime:
  *                 description: Limit time of the round in seconds
  *                 type: integer
+ *                 default: 1800
  */
 
 /**

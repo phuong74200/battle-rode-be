@@ -38,8 +38,6 @@ module.exports = router;
  *             type: object
  *             required:
  *               - idToken
- *               - name
- *               - email
  *             properties:
  *               idToken:
  *                 type: string
