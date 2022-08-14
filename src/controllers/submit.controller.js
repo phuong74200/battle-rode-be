@@ -2,6 +2,7 @@ const httpStatus = require('http-status');
 const he = require('he');
 const fs = require('fs');
 const appRoot = require('app-root-path');
+const moment = require('moment');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { battleService, domService, problemService, imageService } = require('../services');
@@ -9,7 +10,7 @@ const logger = require('../config/logger');
 
 const getFinalScore = (letters, similars) => 21970 ** (similars - 1) * (1500 * (1 / 1.0005 ** letters));
 
-const getScore = catchAsync(async (req, res) => {
+const submit = catchAsync(async (req, res) => {
     const { body, user } = req;
 
     const problem = await problemService.getProblemById(body.problemId);
@@ -44,13 +45,18 @@ const getScore = catchAsync(async (req, res) => {
 
     logger.debug(`diffs: ${numDiffPixels.percent}`);
     logger.debug(`simis: ${1 - numDiffPixels.percent}`);
+
+    const start = moment(battle.startTime);
+    const now = moment();
+
     res.json({
         diffs: numDiffPixels.percent,
         score: getFinalScore(html.length, 1 - numDiffPixels.percent),
         html,
+        timeLeft: problem.battleTime + start.diff(now, 'seconds'),
     });
 });
 
 module.exports = {
-    getScore,
+    submit,
 };

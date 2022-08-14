@@ -18,6 +18,12 @@ const battleSchema = mongoose.Schema(
             type: Date,
             required: true,
         },
+        submits: [
+            {
+                location: { type: mongoose.Types.ObjectId, ref: 'Submit' },
+                count: Number,
+            },
+        ],
     },
     {
         timestamps: true,

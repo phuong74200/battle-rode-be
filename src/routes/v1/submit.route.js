@@ -1,27 +1,27 @@
 const express = require('express');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
-const scoreValidation = require('../../validations/score.validation');
-const scoreController = require('../../controllers/score.controller');
+const submitValidation = require('../../validations/submit.validation');
+const submitController = require('../../controllers/submit.controller');
 
 const router = express.Router();
 
-router.route('/').post(auth(), validate(scoreValidation.getScore), scoreController.getScore);
+router.route('/').post(auth(), validate(submitValidation.getScore), submitController.submit);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Score
- *   description: Score
+ *   name: Submbit
+ *   description: Submbit
  */
 
 /**
  * @swagger
- * /score:
+ * /submit:
  *   post:
- *     summary: Scoring a problem using html/css code
+ *     summary: Scoring a problem with html/css code
  *     tags: [Score]
  *     requestBody:
  *       content:

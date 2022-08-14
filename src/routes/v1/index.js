@@ -4,7 +4,7 @@ const docsRoute = require('./docs.route');
 const problemRoute = require('./problem.route');
 const imageRoute = require('./image.route');
 const battleRoute = require('./battle.route');
-const scoreRoute = require('./score.route');
+const submitRoute = require('./submit.route');
 const config = require('../../config/config');
 
 const router = express.Router();
@@ -27,8 +27,8 @@ const defaultRoutes = [
         route: battleRoute,
     },
     {
-        path: '/score',
-        route: scoreRoute,
+        path: '/submit',
+        route: submitRoute,
     },
 ];
 

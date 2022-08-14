@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const { toJSON } = require('./plugins');
 
-const historySchema = mongoose.Schema(
+const submitSchema = mongoose.Schema(
     {
         battle: {
             type: mongoose.Schema.Types.ObjectId,
@@ -20,12 +20,12 @@ const historySchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-historySchema.plugin(toJSON);
-historySchema.plugin(AutoIncrement, { inc_field: 'historyId' });
+submitSchema.plugin(toJSON);
+submitSchema.plugin(AutoIncrement, { inc_field: 'submitId' });
 
 /**
- * @typedef History
+ * @typedef Submit
  */
-const History = mongoose.model('Battle', historySchema);
+const Submit = mongoose.model('Submit', submitSchema);
 
-module.exports = History;
+module.exports = Submit;
