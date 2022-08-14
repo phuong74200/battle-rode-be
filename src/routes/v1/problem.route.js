@@ -16,6 +16,8 @@ router
         problemController.createProblem
     );
 
+router.route('/all').get(auth('allProblems'), problemController.getProblems);
+
 router.route('/:problemId').get(auth(), validate(problemValidation.getProblemById), problemController.getProblemById);
 
 module.exports = router;
@@ -70,4 +72,12 @@ module.exports = router;
  *           type: integer
  *           example: 1
  *         description: Problem id
+ */
+
+/**
+ * @swagger
+ * /problem/all:
+ *   get:
+ *     summary: Get all problems for admin
+ *     tags: [Problem]
  */

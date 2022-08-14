@@ -45,7 +45,14 @@ const getProblemById = catchAsync(async (req, res) => {
     return res.json(problem);
 });
 
+const getProblems = catchAsync(async (req, res) => {
+    const problems = await problemService.getProblems({});
+
+    return res.json(problems);
+});
+
 module.exports = {
     getProblemById,
     createProblem,
+    getProblems,
 };
