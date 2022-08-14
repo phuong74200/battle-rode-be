@@ -43,9 +43,6 @@ const submit = catchAsync(async (req, res) => {
 
     const numDiffPixels = await imageService.compare(imageBuffer, problemImage);
 
-    logger.debug(`diffs: ${numDiffPixels.percent}`);
-    logger.debug(`simis: ${1 - numDiffPixels.percent}`);
-
     const start = moment(battle.startTime);
     const now = moment();
 
@@ -55,6 +52,10 @@ const submit = catchAsync(async (req, res) => {
         html,
         timeLeft: problem.battleTime + start.diff(now, 'seconds'),
     });
+
+    // res.setHeader('content-type', 'image/png');
+
+    // res.send(imageBuffer);
 });
 
 module.exports = {
