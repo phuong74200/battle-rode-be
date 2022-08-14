@@ -36,8 +36,7 @@ const submit = catchAsync(async (req, res) => {
     }
 
     const html = he.decode(body.code);
-    const purify = domService.purify(html);
-    const imageBuffer = await domService.capture(purify);
+    const imageBuffer = await domService.capture(html);
 
     const problemImage = fs.readFileSync(`${appRoot}/upload/images/${problem.image}`);
 
@@ -49,7 +48,6 @@ const submit = catchAsync(async (req, res) => {
     res.json({
         diffs: numDiffPixels.percent,
         score: getFinalScore(html.length, 1 - numDiffPixels.percent),
-        html,
         timeLeft: problem.battleTime + start.diff(now, 'seconds'),
     });
 

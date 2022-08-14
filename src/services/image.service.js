@@ -3,7 +3,7 @@ const Jimp = require('jimp');
 const compare = async (image1, image2) => {
     // threshold — Matching threshold, ranges from 0 to 1. Smaller values make the comparison more sensitive.
 
-    const threshold = 0;
+    const threshold = 0.05;
 
     const jimage1 = await Jimp.read(image1);
     const jimage2 = await Jimp.read(image2);

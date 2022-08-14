@@ -6,6 +6,7 @@ const capture = async (html) => {
     const page = await browser.newPage();
 
     page.setViewport({ width: 400, height: 300 });
+    page.setJavaScriptEnabled(false);
 
     await page.setRequestInterception(true);
     page.on('request', (request) => {
