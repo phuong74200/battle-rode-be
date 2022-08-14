@@ -13,6 +13,7 @@ coverage
 
 # logs file
 logs
+prod-logs
 
 # files
 upload/images/*

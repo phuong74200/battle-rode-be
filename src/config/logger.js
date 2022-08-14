@@ -21,7 +21,7 @@ const logger = winston.createLogger({
             stderrLevels: ['error'],
         }),
         new winston.transports.File({
-            filename: 'logs/log.log',
+            filename: 'prod-logs/log.log',
         }),
     ],
 });
