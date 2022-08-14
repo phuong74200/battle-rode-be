@@ -22,7 +22,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: pwd
       - run: yarn install
-      - run: cp ~/battle-rode-be/.env ./.env
+      - run: cp ~/rode.env ./.env
       - run: pm2 start ecosystem.dev.config.json
       - run: pm2 start rode-battle
       - run: pm2 save
