@@ -2,8 +2,7 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
-const { problemService } = require('../services');
-const logger = require('../config/logger');
+const { problemService, battleService } = require('../services');
 
 const createProblem = catchAsync(async (req, res) => {
     const problemBody = pick(req.body, ['name', 'closeTime', 'openTime', 'battleTime']);
@@ -13,31 +12,37 @@ const createProblem = catchAsync(async (req, res) => {
         ...problemBody,
         ...problemFile,
     });
-    res.status(httpStatus.CREATED).json({
-        name: result.name,
-        problemId: result.problemId,
-        image: result.image,
-        openTime: result.openTime,
-        closeTime: result.closeTime,
-        battleTime: result.battleTime,
-    });
+    res.status(httpStatus.CREATED).json(result);
 });
 
 const getProblemById = catchAsync(async (req, res) => {
     const { problemId } = pick(req.params, ['problemId']);
-    const result = await problemService.getProblemById(problemId);
-    logger.debug(JSON.stringify(req.user));
-    if (!result) {
+    const { user } = req;
+    const problem = await problemService.getProblemById(problemId);
+
+    if (!problem) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Problem not found');
     }
-    res.json({
-        name: result.name,
-        problemId: result.problemId,
-        image: result.image,
-        openTime: result.openTime,
-        closeTime: result.closeTime,
-        battleTime: result.battleTime,
-    });
+
+    if (user.role === 'admin') {
+        return res.json(problem);
+    }
+
+    const filter = { userId: user._id, problemId: problem._id };
+
+    const battle = await battleService.getBattle(filter);
+
+    if (!battle) {
+        throw new ApiError(httpStatus.NOT_ACCEPTABLE, 'User not join battle');
+    }
+
+    const isTimeout = await battleService.isTimeout(battle);
+
+    if (isTimeout) {
+        throw new ApiError(httpStatus.NOT_ACCEPTABLE, 'Battle timeout');
+    }
+
+    return res.json(problem);
 });
 
 module.exports = {

@@ -22,7 +22,7 @@ const startBattle = catchAsync(async (req, res, next) => {
     const { problemId } = pick(req.params, ['problemId']);
     const { user } = req;
 
-    const problem = await problemService.getProblemById(problemId);
+    const problem = await problemService.getValidProblemById(problemId);
 
     if (!problem) {
         return next(new ApiError(httpStatus.NOT_FOUND, 'Problem not found'));
@@ -30,19 +30,19 @@ const startBattle = catchAsync(async (req, res, next) => {
 
     const filter = { userId: user._id, problemId: problem._id };
 
-    const battles = await battleService.getBattlesByUserAndProblemId(filter);
+    const battle = await battleService.getBattle(filter);
 
-    if (battles.length > 0) {
+    if (battle) {
         return next(new ApiError(httpStatus.CONFLICT, 'User already joined in'));
     }
 
-    const battle = await battleService.createBattle({
+    const createdBattle = await battleService.createBattle({
         user: user._id,
         problem: problem._id,
         startTime: moment(),
     });
 
-    const populateBattle = await battle.populate('user').populate('problem').execPopulate();
+    const populateBattle = await createdBattle.populate('user').populate('problem').execPopulate();
 
     res.json(populateBattle);
 });

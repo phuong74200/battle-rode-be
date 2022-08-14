@@ -24,11 +24,48 @@ const getBattleById = async (battleId) => {
 };
 
 const getBattlesByUserAndProblemId = async ({ userId, problemId }) => {
-    return Battle.find({ user: userId, problem: problemId }).populate('problem').populate('user').exec();
+    return Battle.find({ user: userId, problem: problemId });
+};
+
+const getBattle = async ({ userId, problemId }) => {
+    return Battle.findOne({ user: userId, problem: problemId });
+};
+
+const getValidBattle = async ({ userId, problemId }) => {
+    const battle = await Battle.findOne({ user: userId, problem: problemId })
+        .populate({
+            path: 'problem',
+            match: {
+                openTime: { $lte: moment() },
+                closeTime: { $gte: moment() },
+            },
+        })
+        .exec();
+    return battle;
+};
+
+const isTimeout = async (_battle) => {
+    const battle = await _battle.populate('problem').execPopulate();
+
+    if (!battle || !battle.problem) return true;
+
+    const { problem } = battle;
+
+    const start = moment(battle.startTime);
+    const now = moment();
+
+    if (now.diff(start, 'seconds') > problem.battleTime) {
+        return true;
+    }
+
+    return false;
 };
 
 module.exports = {
     createBattle,
     getBattleById,
     getBattlesByUserAndProblemId,
+    getValidBattle,
+    getBattle,
+    isTimeout,
 };

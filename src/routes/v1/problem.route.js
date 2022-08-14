@@ -16,9 +16,7 @@ router
         problemController.createProblem
     );
 
-router
-    .route('/:problemId')
-    .get(auth('getProblem'), validate(problemValidation.getProblemById), problemController.getProblemById);
+router.route('/:problemId').get(auth(), validate(problemValidation.getProblemById), problemController.getProblemById);
 
 module.exports = router;
 
@@ -61,7 +59,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /problem/{id}:
+ * /problem/{problemId}:
  *   get:
  *     summary: Get a problem by problem ID
  *     tags: [Problem]

@@ -25,7 +25,12 @@ const getProblemById = async (problemId) => {
     return Problem.findOne({ problemId });
 };
 
+const getValidProblemById = async (problemId) => {
+    return Problem.findOne({ problemId, openTime: { $lte: moment() }, closeTime: { $gte: moment() } });
+};
+
 module.exports = {
     createProblem,
     getProblemById,
+    getValidProblemById,
 };
