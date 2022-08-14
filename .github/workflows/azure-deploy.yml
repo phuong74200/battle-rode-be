@@ -11,7 +11,6 @@ jobs:
         node-version: [14.x]
 
     steps:
-      - run: sudo chown -R phuong:phuong ~/actions-runner/_work/battle-rode-be
       - name: Build Number Generator
         uses: einaregilsson/build-number@v3
         with:
