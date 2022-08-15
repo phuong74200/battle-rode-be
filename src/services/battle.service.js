@@ -91,7 +91,7 @@ const getProblemTopBattles = async (condition = {}, top = 10) => {
         { $sort: { 'lastSubmit.score': -1 } },
         { $limit: top },
         // { $unwind: '$wallet' },
-        // { $sort: { 'wallet.amount': 1 } },
+        // { $sort: { 'wallet.amount': 1 } }, //
     ]);
 };
 
