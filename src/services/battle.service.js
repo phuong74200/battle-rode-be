@@ -82,7 +82,16 @@ const getProblemTopBattles = async (condition = {}, top = 10) => {
                 localField: 'submits',
                 foreignField: '_id',
                 as: 'lastSubmit',
-                pipeline: [{ $sort: { createdAt: -1 } }, { $limit: 1 }, { $project }],
+                pipeline: [
+                    { $sort: { createdAt: -1 } },
+                    { $limit: 1 },
+                    {
+                        $addFields: {
+                            submitAt: '$createdAt',
+                        },
+                    },
+                    { $project },
+                ],
             },
         },
         { $unwind: '$user' },
