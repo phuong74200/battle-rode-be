@@ -18,12 +18,7 @@ const battleSchema = mongoose.Schema(
             type: Date,
             required: true,
         },
-        submits: [
-            {
-                location: { type: mongoose.Types.ObjectId, ref: 'Submit' },
-                count: Number,
-            },
-        ],
+        submits: [{ type: mongoose.Types.ObjectId, ref: 'Submit' }],
     },
     {
         timestamps: true,

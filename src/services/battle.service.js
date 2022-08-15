@@ -31,6 +31,70 @@ const getBattle = async ({ userId, problemId }) => {
     return Battle.findOne({ user: userId, problem: problemId });
 };
 
+const getBattles = async (condition = {}) => {
+    return Battle.find(condition).populate('submits').exec();
+};
+
+const getBattlesWithLastSubmit = async (condition = {}) => {
+    return Battle.find(condition)
+        .populate({
+            path: 'submits',
+            options: {
+                sort: {
+                    createdAt: -1,
+                },
+                limit: 1,
+                select: '-battle',
+            },
+        })
+        .populate('user')
+        .exec();
+};
+
+const getProblemTopBattles = async (condition = {}, top = 10) => {
+    // return Battle.find(condition)
+    //     .limit(top)
+    //     .populate({
+    //         path: 'submits',
+    //         options: {
+    //             sort: [{ score: -1 }],
+    //             select: '-battle',
+    //         },
+    //     })
+    //     .populate('user')
+    //     .exec();
+
+    const $project = {
+        problem: false,
+        startTime: false,
+        createdAt: false,
+        updatedAt: false,
+        __v: false,
+        _id: false,
+        submits: false,
+    };
+
+    return Battle.aggregate([
+        { $lookup: { from: 'users', localField: 'user', foreignField: '_id', as: 'user', pipeline: [{ $project }] } },
+        {
+            $lookup: {
+                from: 'submits',
+                localField: 'submits',
+                foreignField: '_id',
+                as: 'lastSubmit',
+                pipeline: [{ $sort: { createdAt: -1 } }, { $limit: 1 }, { $project }],
+            },
+        },
+        { $unwind: '$user' },
+        { $unwind: '$lastSubmit' },
+        { $project },
+        { $sort: { 'lastSubmit.score': -1 } },
+        { $limit: top },
+        // { $unwind: '$wallet' },
+        // { $sort: { 'wallet.amount': 1 } },
+    ]);
+};
+
 const getValidBattle = async ({ userId, problemId }) => {
     const battle = await Battle.findOne({ user: userId, problem: problemId })
         .populate({
@@ -67,5 +131,8 @@ module.exports = {
     getBattlesByUserAndProblemId,
     getValidBattle,
     getBattle,
+    getBattles,
     isTimeout,
+    getBattlesWithLastSubmit,
+    getProblemTopBattles,
 };

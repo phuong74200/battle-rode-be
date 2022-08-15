@@ -13,6 +13,14 @@ const submitSchema = mongoose.Schema(
             type: Number,
             default: 0,
         },
+        diffs: {
+            type: Number,
+            default: 1,
+        },
+        code: {
+            type: String,
+            default: '',
+        },
     },
     {
         timestamps: true,

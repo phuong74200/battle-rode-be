@@ -22,7 +22,7 @@ module.exports = router;
  * /submit:
  *   post:
  *     summary: Scoring a problem with html/css code
- *     tags: [Score]
+ *     tags: [Submbit]
  *     requestBody:
  *       content:
  *         application/json:
