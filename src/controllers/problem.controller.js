@@ -3,12 +3,17 @@ const pick = require('../utils/pick');
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
 const { problemService, battleService } = require('../services');
+const logger = require('../config/logger');
 
 const createProblem = catchAsync(async (req, res, next) => {
     const problemBody = pick(req.body, ['name', 'closeTime', 'openTime', 'battleTime', 'problemId']);
     const problemFile = pick(req.file, ['filename']);
 
+    logger.debug(JSON.stringify(problemBody));
+
     const problem = problemService.getProblemById(problemBody.problemId);
+
+    logger.debug(JSON.stringify(problem));
 
     if (problem) {
         return next(new ApiError(httpStatus.CONFLICT, 'ProblemId existed'));

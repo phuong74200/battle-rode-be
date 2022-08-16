@@ -36,7 +36,6 @@ const problemSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 problemSchema.plugin(toJSON);
-problemSchema.plugin(AutoIncrement, { inc_field: 'problemId' });
 
 /**
  * @typedef Problem
