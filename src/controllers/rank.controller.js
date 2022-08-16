@@ -8,14 +8,9 @@ const logger = require('../config/logger');
 const getRank = catchAsync(async (req, res) => {
     const { problemId, top } = pick(req.params, ['problemId', 'top']);
 
-    const problem = await problemService.getProblemById(problemId);
+    logger.debug(problemId);
 
-    if (!problem) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Problem not found');
-    }
-    logger.debug(top);
-
-    const battles = await battleService.getProblemTopBattles({ problem: problem._id }, parseInt(top, 10));
+    const battles = await battleService.getProblemTopBattles(problemId, parseInt(top, 10));
 
     res.json(battles);
 });

@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const getScore = {
     body: Joi.object().keys({
-        problemId: Joi.number().required(),
+        problemId: Joi.string().required(),
         code: Joi.string().required(),
     }),
 };

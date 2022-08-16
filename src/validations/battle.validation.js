@@ -8,7 +8,7 @@ const getBattle = {
 
 const startBattle = {
     params: Joi.object().keys({
-        problemId: Joi.number().required(),
+        problemId: Joi.string().required(),
     }),
 };
 

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const AutoIncrement = require('mongoose-sequence')(mongoose);
 const { toJSON } = require('./plugins');
 
 const problemSchema = mongoose.Schema(
@@ -28,6 +27,11 @@ const problemSchema = mongoose.Schema(
             type: Number,
             default: 30 * 60, // exam time is in seconds
         },
+        colors: [
+            {
+                type: String,
+            },
+        ],
     },
     {
         timestamps: true,

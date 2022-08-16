@@ -8,7 +8,10 @@ const catchAsync = require('../utils/catchAsync');
 const { battleService, domService, problemService, imageService, submitService } = require('../services');
 const logger = require('../config/logger');
 
-const getFinalScore = (letters, similars) => 21970 ** (similars - 1) * (1500 * (1 / 1.0005 ** letters));
+const getFinalScore = (letters, similars) => {
+    const MAX_SCORE = 1000;
+    return 21970 ** (similars - 1) * (MAX_SCORE * (1 / 1.0005 ** letters));
+};
 
 const submit = catchAsync(async (req, res) => {
     const { body, user } = req;

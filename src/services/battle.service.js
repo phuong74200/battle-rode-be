@@ -51,7 +51,7 @@ const getBattlesWithLastSubmit = async (condition = {}) => {
         .exec();
 };
 
-const getProblemTopBattles = async (condition = {}, top = 10) => {
+const getProblemTopBattles = async (problemId, top = 10) => {
     // return Battle.find(condition)
     //     .limit(top)
     //     .populate({
@@ -65,17 +65,28 @@ const getProblemTopBattles = async (condition = {}, top = 10) => {
     //     .exec();
 
     const $project = {
-        problem: false,
+        // problem: false,
         startTime: false,
         createdAt: false,
         updatedAt: false,
         __v: false,
         _id: false,
         submits: false,
+        battle: false,
+        problem: false,
     };
 
     return Battle.aggregate([
         { $lookup: { from: 'users', localField: 'user', foreignField: '_id', as: 'user', pipeline: [{ $project }] } },
+        {
+            $lookup: {
+                from: 'problems',
+                localField: 'problem',
+                foreignField: '_id',
+                as: 'problem',
+                pipeline: [{ $project }],
+            },
+        },
         {
             $lookup: {
                 from: 'submits',
@@ -95,6 +106,8 @@ const getProblemTopBattles = async (condition = {}, top = 10) => {
             },
         },
         { $unwind: '$user' },
+        { $unwind: '$problem' },
+        { $match: { 'problem.problemId': problemId } },
         { $unwind: '$lastSubmit' },
         { $project },
         { $sort: { 'lastSubmit.score': -1 } },

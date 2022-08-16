@@ -6,7 +6,7 @@ const { problemService, battleService } = require('../services');
 const logger = require('../config/logger');
 
 const createProblem = catchAsync(async (req, res, next) => {
-    const problemBody = pick(req.body, ['name', 'closeTime', 'openTime', 'battleTime', 'problemId']);
+    const problemBody = pick(req.body, ['name', 'closeTime', 'openTime', 'battleTime', 'problemId', 'colors']);
     const problemFile = pick(req.file, ['filename']);
 
     logger.debug(JSON.stringify(problemBody));

@@ -7,13 +7,14 @@ const createProblem = {
         closeTime: Joi.date().required(),
         battleTime: Joi.number(),
         problemId: Joi.string().required(),
+        colors: Joi.array().items(Joi.string()).required(),
     }),
     file: Joi.object().required().label('image is required'),
 };
 
 const getProblemById = {
     params: Joi.object().keys({
-        problemId: Joi.number(),
+        problemId: Joi.string(),
     }),
 };
 

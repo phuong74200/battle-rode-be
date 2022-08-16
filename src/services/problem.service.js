@@ -14,6 +14,7 @@ const createProblem = async (problem) => {
         closeTime: moment(problem.closeTime),
         battleTime: problem.battleTime,
         problemId: problem.problemId,
+        colors: problem.colors,
     });
 };
 
