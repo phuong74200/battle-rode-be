@@ -9,7 +9,12 @@ const algoSubmitSchema = mongoose.Schema(
             ref: 'User',
             required: true,
         },
-        file: {
+        algo: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Algo',
+            required: true,
+        },
+        code: {
             type: String,
             required: true,
         },
@@ -21,11 +26,11 @@ const algoSubmitSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 algoSubmitSchema.plugin(toJSON);
-algoSubmitSchema.plugin(AutoIncrement, { inc_field: 'submitId' });
+algoSubmitSchema.plugin(AutoIncrement, { inc_field: 'algoSubmitId' });
 
 /**
- * @typedef AlgoSumit
+ * @typedef AlgoSubmit
  */
-const AlgoSumit = mongoose.model('AlgoSumit', algoSubmitSchema);
+const AlgoSubmit = mongoose.model('AlgoSubmit', algoSubmitSchema);
 
-module.exports = AlgoSumit;
+module.exports = AlgoSubmit;

@@ -13,7 +13,7 @@ const image = multer({
 });
 
 const file = multer({
-    dest: 'upload/images',
+    dest: 'upload/algos',
     limits: { fileSize: 5e6 }, // 5mb
 });
 

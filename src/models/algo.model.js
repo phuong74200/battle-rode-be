@@ -4,7 +4,7 @@ const { toJSON } = require('./plugins');
 
 const algoSchema = mongoose.Schema(
     {
-        drive: {
+        templateLink: {
             type: String,
             required: true,
         },
