@@ -6,6 +6,7 @@ const imageRoute = require('./image.route');
 const battleRoute = require('./battle.route');
 const submitRoute = require('./submit.route');
 const rankRoute = require('./rank.route');
+const algoRoute = require('./algo.route');
 const config = require('../../config/config');
 
 const router = express.Router();
@@ -34,6 +35,10 @@ const defaultRoutes = [
     {
         path: '/rank',
         route: rankRoute,
+    },
+    {
+        path: '/algo',
+        route: algoRoute,
     },
 ];
 

@@ -7,3 +7,4 @@ module.exports.battleService = require('./battle.service');
 module.exports.domService = require('./dom.service');
 module.exports.imageService = require('./image.service');
 module.exports.submitService = require('./submit.service');
+module.exports.algoService = require('./algo.service');
