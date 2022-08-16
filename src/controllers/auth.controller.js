@@ -14,12 +14,11 @@ const login = catchAsync(async (req, res) => {
 
     const user = await userService.getUserByEmail(gUser.email);
 
-    const tokens = await tokenService.generateAuthTokens({
-        gUser,
-        userData: user,
-    });
-
     if (user) {
+        const tokens = await tokenService.generateAuthTokens({
+            ...gUser,
+            userData: user,
+        });
         res.json({
             tokens,
             userData: user,
@@ -33,6 +32,10 @@ const login = catchAsync(async (req, res) => {
             isEmailVerified: gUser.email_verified,
         };
         const createdUser = await userService.createUser(newUser);
+        const tokens = await tokenService.generateAuthTokens({
+            ...gUser,
+            userData: createdUser,
+        });
         res.json({
             tokens,
             userData: createdUser,
