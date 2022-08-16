@@ -11,11 +11,11 @@ const createProblem = catchAsync(async (req, res, next) => {
 
     logger.debug(JSON.stringify(problemBody));
 
-    const problem = problemService.getProblemById(problemBody.problemId);
+    const problem = await problemService.getProblemById(problemBody.problemId);
 
     logger.debug(JSON.stringify(problem));
 
-    if (problem) {
+    if (!Object.keys({}).length) {
         return next(new ApiError(httpStatus.CONFLICT, 'ProblemId existed'));
     }
 
