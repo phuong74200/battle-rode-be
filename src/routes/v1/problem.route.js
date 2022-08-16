@@ -60,6 +60,11 @@ module.exports = router;
  *               problemId:
  *                 description: The code that user needs to join in the battle
  *                 type: string
+ *               colors:
+ *                 description: color codes that use in the test
+ *                 type: array
+ *                   items:
+ *                     type: string
  */
 
 /**
