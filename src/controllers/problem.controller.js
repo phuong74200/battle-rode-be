@@ -15,7 +15,7 @@ const createProblem = catchAsync(async (req, res, next) => {
 
     logger.debug(JSON.stringify(problem));
 
-    if (!Object.keys({}).length) {
+    if (problem) {
         return next(new ApiError(httpStatus.CONFLICT, 'ProblemId existed'));
     }
 
