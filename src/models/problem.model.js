@@ -14,7 +14,7 @@ const problemSchema = mongoose.Schema(
             required: true,
         },
         problemId: {
-            type: Number,
+            type: String,
         },
         openTime: {
             type: Date,
