@@ -4,7 +4,6 @@ const moment = require('moment');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { battleService, domService, problemService, imageService, submitService } = require('../services');
-const logger = require('../config/logger');
 
 const getFinalScore = (letters, similars) => {
     const MAX_SCORE = 1000;
@@ -15,8 +14,6 @@ const submit = catchAsync(async (req, res) => {
     const { body, user } = req;
 
     const problem = await problemService.getProblemById(body.problemId);
-
-    logger.debug(JSON.stringify(body));
 
     if (!problem) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Problem not found');
@@ -38,8 +35,6 @@ const submit = catchAsync(async (req, res) => {
 
     const html = he.decode(body.code);
     const imageBuffer = await domService.capture(html);
-
-    logger.debug(problem.image);
 
     const problemImage = await imageService.getImage(problem.image);
 
