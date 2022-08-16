@@ -57,6 +57,9 @@ module.exports = router;
  *                 description: Limit time of the round in seconds
  *                 type: integer
  *                 default: 1800
+ *               problemId:
+ *                 description: The code that user needs to join in the battle
+ *                 type: string
  */
 
 /**

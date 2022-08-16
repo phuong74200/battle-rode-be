@@ -13,6 +13,7 @@ const createProblem = async (problem) => {
         openTime: moment(problem.openTime),
         closeTime: moment(problem.closeTime),
         battleTime: problem.battleTime,
+        problemId: problem.problemId,
     });
 };
 

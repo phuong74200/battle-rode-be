@@ -6,6 +6,7 @@ const createProblem = {
         openTime: Joi.date().required(),
         closeTime: Joi.date().required(),
         battleTime: Joi.number(),
+        problemId: Joi.string().required(),
     }),
     file: Joi.object().required().label('image is required'),
 };
