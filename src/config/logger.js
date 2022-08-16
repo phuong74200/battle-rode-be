@@ -23,7 +23,7 @@ const logger = winston.createLogger({
             stderrLevels: ['error'],
         }),
         new winston.transports.File({
-            filename: 'logs/log.log',
+            filename: path.join(os.homedir(), 'logs/log.log'),
         }),
     ],
 });
