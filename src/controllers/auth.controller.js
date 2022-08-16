@@ -11,9 +11,13 @@ const register = catchAsync(async (req, res) => {
 const login = catchAsync(async (req, res) => {
     const { idToken } = req.body;
     const gUser = await authService.loginWithGoogle(idToken);
-    const tokens = await tokenService.generateAuthTokens(gUser);
 
     const user = await userService.getUserByEmail(gUser.email);
+
+    const tokens = await tokenService.generateAuthTokens({
+        gUser,
+        userData: user,
+    });
 
     if (user) {
         res.json({
