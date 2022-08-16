@@ -63,8 +63,8 @@ module.exports = router;
  *               colors:
  *                 description: color codes that use in the test
  *                 type: array
- *                   items:
- *                     type: string
+ *                 items:
+ *                   type: string
  */
 
 /**

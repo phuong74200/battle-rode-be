@@ -1,7 +1,5 @@
 const httpStatus = require('http-status');
 const he = require('he');
-const fs = require('fs');
-const appRoot = require('app-root-path');
 const moment = require('moment');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
@@ -41,7 +39,9 @@ const submit = catchAsync(async (req, res) => {
     const html = he.decode(body.code);
     const imageBuffer = await domService.capture(html);
 
-    const problemImage = fs.readFileSync(`${appRoot}/upload/images/${problem.image}`);
+    logger.debug(problem.image);
+
+    const problemImage = await imageService.getImage(problem.image);
 
     const numDiffPixels = await imageService.compare(imageBuffer, problemImage);
 
@@ -72,7 +72,7 @@ const submit = catchAsync(async (req, res) => {
 
     // res.setHeader('content-type', 'image/png');
 
-    // res.send(imageBuffer);
+    // res.send(problemImage);
 });
 
 module.exports = {

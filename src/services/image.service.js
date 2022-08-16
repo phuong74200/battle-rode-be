@@ -1,4 +1,20 @@
 const Jimp = require('jimp');
+const fs = require('fs');
+const appRoot = require('app-root-path');
+const path = require('path');
+const sanitize = require('sanitize-filename');
+const httpStatus = require('http-status');
+const ApiError = require('../utils/ApiError');
+
+const getImage = async (imgName) => {
+    const sanitized = sanitize(imgName);
+    const imgPath = path.join(`${appRoot}/upload/images/${sanitized}`);
+    try {
+        return fs.readFileSync(imgPath);
+    } catch (e) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Image not found');
+    }
+};
 
 const compare = async (image1, image2) => {
     // threshold — Matching threshold, ranges from 0 to 1. Smaller values make the comparison more sensitive.
@@ -11,4 +27,4 @@ const compare = async (image1, image2) => {
     return diff;
 };
 
-module.exports = { compare };
+module.exports = { compare, getImage };
