@@ -8,7 +8,7 @@ const logger = require('../config/logger');
 const getImage = catchAsync(async (req, res, next) => {
     const { imageId } = req.params;
     const file = await imageService.getImage(imageId);
-    return res.send(`data:image/png;base64,${file}`);
+    return res.send(`data:image/png;base64,${new Buffer.from(file).toString('base64')}`);
 });
 
 module.exports = {

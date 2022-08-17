@@ -10,7 +10,7 @@ const getImage = async (imgName) => {
     const sanitized = sanitize(imgName);
     const imgPath = path.join(`${appRoot}/upload/images/${sanitized}`);
     try {
-        return fs.readFileSync(imgPath, { encoding: 'base64' });
+        return fs.readFileSync(imgPath);
     } catch (e) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Image not found');
     }
