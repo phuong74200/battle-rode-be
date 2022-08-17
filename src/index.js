@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
-const path = require('path');
 const app = require('./app');
 const config = require('./config/config');
 const logger = require('./config/logger');
@@ -15,9 +15,16 @@ let server;
 mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
     logger.info('Connected to MongoDB');
     const httpsServer = https.createServer(credentials, app);
-    server = httpsServer.listen(config.port, () => {
-        logger.info(`Listening to port ${config.port}`);
-    });
+    const httpServer = http.createServer(app);
+    if (config.env === 'production') {
+        server = httpsServer.listen(config.port, () => {
+            logger.info(`SSL: Listening to port ${config.port}`);
+        });
+    } else {
+        server = httpServer.listen(config.port, () => {
+            logger.info(`NoSSL: Listening to port ${config.port}`);
+        });
+    }
 });
 
 const exitHandler = () => {
