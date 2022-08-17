@@ -7,6 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 const httpStatus = require('http-status');
 const appRoot = require('app-root-path');
+const path = require('path');
 const config = require('./config/config');
 const morgan = require('./config/morgan');
 const { jwtStrategy } = require('./config/passport');
@@ -53,11 +54,13 @@ if (config.env === 'production') {
     app.use('/v1/auth', authLimiter);
 }
 
-// public
-app.use('/', express.static(`public`));
-
 // v1 api routes
 app.use('/v1', routes);
+
+// public
+const publicPath = path.join(__dirname, '../public');
+app.use(express.static(publicPath));
+app.use('*', express.static(publicPath));
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
