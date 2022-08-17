@@ -9,7 +9,7 @@
       "time": true,
       "env": {
         "NODE_ENV": "production",
-        "PORT": 80
+        "PORT": 443
       }
     }
   ]
