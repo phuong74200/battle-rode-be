@@ -18,8 +18,7 @@ mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
             logger.info(`SSL: Listening to port ${config.port}`);
         });
     } else {
-        const httpServer = http.createServer(app);
-        server = httpServer.listen(config.port, () => {
+        server = app.listen(config.port, () => {
             logger.info(`NoSSL: Listening to port ${config.port}`);
         });
     }
