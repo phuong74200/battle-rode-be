@@ -21,3 +21,6 @@ upload/algos/*
 
 # keep empty folder by this file
 !.empty
+
+# cert
+cert/*
