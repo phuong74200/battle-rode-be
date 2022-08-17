@@ -53,9 +53,11 @@ if (config.env === 'production') {
     app.use('/v1/auth', authLimiter);
 }
 
+// public
+app.use('/', express.static(`public`));
+
 // v1 api routes
 app.use('/v1', routes);
-app.use('/', express.static(`${appRoot}/public`));
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
