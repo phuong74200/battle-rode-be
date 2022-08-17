@@ -15,7 +15,7 @@ jobs:
       - run: pwd
       - run: yarn install
       - run: cp ~/rode.env ./.env
-      - run: cp ~/cert ./cert
+      - run: cp -R ~/cert ./cert
       - run: pm2 start ecosystem.dev.config.json
       - run: pm2 start rode-battle
       - run: pm2 save
