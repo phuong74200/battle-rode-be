@@ -6,7 +6,6 @@ const compression = require('compression');
 const cors = require('cors');
 const passport = require('passport');
 const httpStatus = require('http-status');
-const appRoot = require('app-root-path');
 const path = require('path');
 const config = require('./config/config');
 const morgan = require('./config/morgan');

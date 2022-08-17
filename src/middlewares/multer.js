@@ -15,6 +15,9 @@ const image = multer({
 const file = multer({
     dest: 'upload/algos',
     limits: { fileSize: 5e6 }, // 5mb
+    filename(req, _file, callback) {
+        callback(null, Math.random() + _file.originalname);
+    },
 });
 
 module.exports = {
