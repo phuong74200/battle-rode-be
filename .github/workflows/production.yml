@@ -28,6 +28,3 @@ jobs:
       - run: pm2 start ecosystem.config.json
       - run: pm2 start rode-battle
       - run: pm2 save
-      - run: echo -en '\n'>>./.env
-      - run: echo $GIT_ACTION>>./.env
-      - run: echo GIT_ACTION_VERSION=`echo $(($BUILD_NUMBER+40+100)) | fold -w1 | paste -sd.`>>./.env
