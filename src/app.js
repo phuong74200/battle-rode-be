@@ -25,15 +25,15 @@ if (config.env !== 'test') {
 
 // set security HTTP headers
 if (config.env !== 'development') {
-    app.use(
-        helmet({
-            contentSecurityPolicy: {
-                directives: {
-                    'script-src': ['google', '*.google', '*.google.com', '*', "'unsafe-inline'"],
-                },
-            },
-        })
-    );
+    // app.use(
+    //     helmet({
+    //         contentSecurityPolicy: {
+    //             directives: {
+    //                 'script-src': ['google', '*.google', '*.google.com', '*', "'unsafe-inline'"],
+    //             },
+    //         },
+    //     })
+    // );
 }
 
 // parse json request body
