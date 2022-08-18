@@ -12,8 +12,6 @@ const createAlgo = async (algo) => {
     return Algo.create(algo);
 };
 
-//
-
 const getAlgoById = async (id) => {
     return Algo.findOne({ algoId: id });
 };
@@ -44,17 +42,22 @@ const getSubmitAlgo = async (algoId, top = 10) => {
         _id: false,
     };
     return AlgoSubmit.aggregate([
-        { $sort: { createdAt: 1 } },
         {
             $group: {
                 _id: '$user',
                 lastSubmitFile: { $last: '$code' },
+                algo: { $first: '$algo' },
+                submitAt: { $first: '$createdAt' },
             },
         },
         { $lookup: { from: 'users', localField: '_id', foreignField: '_id', as: 'user', pipeline: [{ $project }] } },
+        { $lookup: { from: 'algos', localField: 'algo', foreignField: '_id', as: 'algo', pipeline: [{ $project }] } },
         { $unwind: '$user' },
-        { $project },
+        { $unwind: '$algo' },
         { $limit: top },
+        { $match: { 'algo.algoId': algoId } },
+        { $sort: { submitAt: 1 } },
+        { $project },
     ]);
 };
 

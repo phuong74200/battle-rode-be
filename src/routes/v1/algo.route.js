@@ -68,6 +68,9 @@ module.exports = router;
  *                 description: the time that this template will be closed
  *                 type: string
  *                 format: YYYY-MM-DDTHH:mm:ss.SSSZ
+ *               algoId:
+ *                 description: The algoId
+ *                 type: integer
  */
 
 /**

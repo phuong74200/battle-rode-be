@@ -5,6 +5,7 @@ const createAlgo = {
         templateLink: Joi.string().required(),
         openTime: Joi.date().required(),
         closeTime: Joi.date().required(),
+        algoId: Joi.number().required(),
     }),
 };
 

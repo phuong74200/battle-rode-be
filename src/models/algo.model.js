@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const AutoIncrement = require('mongoose-sequence')(mongoose);
 const { toJSON } = require('./plugins');
 
 const algoSchema = mongoose.Schema(
@@ -16,6 +15,10 @@ const algoSchema = mongoose.Schema(
             type: Date,
             required: true,
         },
+        algoId: {
+            type: Number,
+            required: true,
+        },
     },
     {
         timestamps: true,
@@ -24,7 +27,6 @@ const algoSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 algoSchema.plugin(toJSON);
-algoSchema.plugin(AutoIncrement, { inc_field: 'algoId' });
 
 /**
  * @typedef Algo

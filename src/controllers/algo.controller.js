@@ -9,7 +9,13 @@ const { algoService } = require('../services');
 const logger = require('../config/logger');
 
 const createAlgo = catchAsync(async (req, res, next) => {
-    const algoBody = pick(req.body, ['openTime', 'closeTime', 'templateLink']);
+    const algoBody = pick(req.body, ['openTime', 'closeTime', 'templateLink', 'algoId']);
+
+    const check = await algoService.getAlgoById(algoBody.algoId);
+
+    if (check) {
+        throw new ApiError(httpStatus.CONFLICT, 'algoId existed');
+    }
 
     const result = await algoService.createAlgo(algoBody);
     res.status(httpStatus.CREATED).json(result);
