@@ -23,6 +23,10 @@ if (config.env !== 'test') {
     app.use(morgan.errorHandler);
 }
 
+const root = `${__dirname}/public`;
+app.use(express.static(root));
+app.use(fallback('index.html', { root }));
+
 // set security HTTP headers
 if (config.env !== 'development') {
     const trusted = ["'self'"];
@@ -35,6 +39,10 @@ if (config.env !== 'development') {
                     "'unsafe-inline'",
                     'https://www.googletagmanager.com',
                     '*.googletagmanager.com',
+                    'https://firebase.googleapis.com',
+                    'https://firebaseinstallations.googleapis.com',
+                    'https://firebaseinstallations.googleapis.com',
+                    'https://googleapis.com',
                 ].concat(trusted),
             },
         })
@@ -43,8 +51,6 @@ if (config.env !== 'development') {
 
 // parse json request body
 app.use(express.json());
-
-const root = `${__dirname}/public`;
 
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
@@ -71,9 +77,6 @@ if (config.env === 'production') {
 
 // v1 api routes
 app.use('/v1', routes);
-
-app.use(express.static(root));
-app.use(fallback('index.html', { root }));
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
