@@ -25,7 +25,11 @@ if (config.env !== 'test') {
 
 // set security HTTP headers
 if (config.env !== 'development') {
-    app.use(helmet());
+    app.use(
+        helmet({
+            contentSecurityPolicy: false,
+        })
+    );
 }
 
 // parse json request body
