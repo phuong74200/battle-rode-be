@@ -27,7 +27,11 @@ if (config.env !== 'test') {
 if (config.env !== 'development') {
     app.use(
         helmet({
-            contentSecurityPolicy: false,
+            contentSecurityPolicy: {
+                directives: {
+                    'script-src': ['google', '*.google', '*.google.com', '*.googleapis.com', "'unsafe-inline'"],
+                },
+            },
         })
     );
 }
