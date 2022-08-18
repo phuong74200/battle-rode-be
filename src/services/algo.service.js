@@ -6,6 +6,7 @@ const sanitize = require('sanitize-filename');
 const httpStatus = require('http-status');
 const { Algo, AlgoSubmit } = require('../models');
 const ApiError = require('../utils/ApiError');
+const logger = require('../config/logger');
 
 const createAlgo = async (algo) => {
     return Algo.create(algo);
@@ -60,6 +61,7 @@ const getSubmitAlgo = async (algoId, top = 10) => {
 const getFile = async (fileName) => {
     const sanitized = sanitize(fileName);
     const filePath = path.join(`${appRoot}/upload/algos/${sanitized}`);
+    logger.debug(filePath);
     try {
         return fs.readFileSync(filePath);
     } catch (e) {

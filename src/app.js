@@ -7,6 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 const httpStatus = require('http-status');
 const appRoot = require('app-root-path');
+const fallback = require('express-history-api-fallback');
 const config = require('./config/config');
 const morgan = require('./config/morgan');
 const { jwtStrategy } = require('./config/passport');
@@ -29,6 +30,8 @@ if (config.env !== 'development') {
 
 // parse json request body
 app.use(express.json());
+
+const root = `${__dirname}/public`;
 
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
@@ -55,6 +58,9 @@ if (config.env === 'production') {
 
 // v1 api routes
 app.use('/v1', routes);
+
+app.use(express.static(root));
+app.use(fallback('index.html', { root }));
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
