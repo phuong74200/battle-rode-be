@@ -25,15 +25,20 @@ if (config.env !== 'test') {
 
 // set security HTTP headers
 if (config.env !== 'development') {
-    // app.use(
-    //     helmet({
-    //         contentSecurityPolicy: {
-    //             directives: {
-    //                 'script-src': ['google', '*.google', '*.google.com', '*', "'unsafe-inline'"],
-    //             },
-    //         },
-    //     })
-    // );
+    const trusted = ["'self'"];
+    app.use(
+        helmet.contentSecurityPolicy({
+            directives: {
+                defaultSrc: trusted,
+                scriptSrc: [
+                    "'unsafe-eval'",
+                    "'unsafe-inline'",
+                    'https://www.googletagmanager.com',
+                    '*.googletagmanager.com',
+                ].concat(trusted),
+            },
+        })
+    );
 }
 
 // parse json request body
