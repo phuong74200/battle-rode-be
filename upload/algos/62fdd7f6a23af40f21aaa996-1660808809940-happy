@@ -1,0 +1,55 @@
+
+import static java.lang.Math.sqrt;
+import java.util.Scanner;
+
+
+/**
+ *
+ * @author hd
+ */
+public class Problem_Two {
+
+    public static int inputNumber() {
+        int number = -1;
+      	
+	
+	return 0;
+            }
+
+    public static int getPrimeNumberList(int number) {
+        int listPrime[] = null;
+	do{
+		System.out.println("Please enter a number to check prime: " + listPrime);
+		
+	}
+	while (number <2);
+	if (getPrimeNumberList()){
+		System.out.println("%d is a prime number\n" +listPrime);
+	}
+	else System.out.println("%d isn't a prime number\n" + listPrime);
+}
+        return listPrime;
+    }
+    
+//    public static int[] getReversibleList  (int number) {
+//        int[] listReversible ;
+        your code here
+
+       return listReversible;
+    }
+
+   public static int[] getReversible_SumList(int number) {
+       int listReversible_Sum[];
+       
+        return listReversible_Sum;
+}
+//do not change anything in the main method
+    public static void main(String[] args) {
+        System.out.print("input number: ");
+        int number = inputNumber();
+          System.out.println("Prime List: "+ getPrimeNumberList(number));
+       System.out.println("Reversible List: " +getReversibleList(number));
+      System.out.println("Reversible_Sum List: " +getReversible_SumList(number));
+    
+}
+}

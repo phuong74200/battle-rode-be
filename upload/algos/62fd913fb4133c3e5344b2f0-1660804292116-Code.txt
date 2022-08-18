@@ -1,0 +1,27 @@
+Git:
++ git config --global user.name 'Tien'
++ git config --global user.email 'viettien1602@gmail.com'
+
++ git init
++ git status
++ git log
++ git add .
++ git commit -m 'changes'
+
+- Push an existing repository
++ git remote add origin ...
++ git branch -M main
++ git push -u origin main
+
+- Clone an existing repository
++ git clone ...
+
++ git branch
++ git branch -d ...
++ git checkout ... / git checkout -b ...
++ git merge branch
++ git push
+
++ git push --set-upstream origin 'name'
+
+.gitignore

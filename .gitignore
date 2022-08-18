@@ -16,8 +16,6 @@ logs
 prod-logs
 
 # files
-upload/images/*
-upload/algos/*
 
 # keep empty folder by this file
 !.empty
