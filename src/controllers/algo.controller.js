@@ -73,8 +73,10 @@ const getFile = catchAsync(async (req, res, next) => {
     const { fileId } = pick(req.params, ['fileId']);
     const sanitized = sanitize(fileId);
     const filePath = path.join(`${appRoot}/upload/algos/${sanitized}`);
-    res.download(filePath, () => {
-        return next(new ApiError(httpStatus.NOT_FOUND, 'File not found'));
+    res.download(filePath, (err) => {
+        if (err) {
+            next(new ApiError(httpStatus.NOT_FOUND, 'File not found'));
+        }
     });
 });
 
